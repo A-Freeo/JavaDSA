@@ -105,6 +105,62 @@ final class LinkedListController{
         }
     }
 
+    public static int wholeInteger(Node head){
+        Node temp = head;
+        int sum = 0;
+        while(temp != null){
+            sum = (sum * 10) + temp.getValue();
+            temp = temp.getNext();
+        }
+        return sum;
+    }
+
+    public static void reverse(Node head){
+        Node prev = null;
+        Node current = head;
+        Node next = null;
+        while(current != null){
+            next = current.getNext();
+            current.setNext(prev);
+            prev = current;
+            current = next;
+
+        }
+        head = prev;
+    }
+
+
+    public static boolean findCycle(Node head){
+        Node slow = head;
+        Node fast = head;
+        while(fast != null && fast.getNext() != null){
+            slow = slow.getNext();
+            fast = fast.getNext().getNext();
+            if(slow == fast){
+                System.out.println("Cycle detected");
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static void printNthNodeFromEnd(Node head, int n){
+        Node slow = head;
+        Node fast = head;
+        if(findCycle(head)) return;
+        for(int i = 0; i < n; i++){
+            if(fast == null) return;
+            fast = fast.getNext();
+        }
+        while(fast != null){
+            // fast.getNext() would be for having slow be one before the target 
+            slow = slow.getNext();
+            fast = fast.getNext();
+        }
+        System.out.println(slow.getValue());
+
+    }
+
     public static void bubbleSort(Node head){
         if(head == null || head.getNext() == null) return;
 
@@ -135,6 +191,9 @@ final class LinkedListController{
     public static void findMedSorted(Node head1, Node head2){
         Node i = head1;
         Node j = head2;
+        // auto sorts lists
+        bubbleSort(i);
+        bubbleSort(j);
 
         Vector<Integer> values = new Vector<>();
 
@@ -167,27 +226,27 @@ final class LinkedListController{
 
     public static Node removeNthFromEnd(Node head, int n){
 
-
-        Node fast = head;
-        Node slow = head;
         Node dummy = new Node(0);
         dummy.setNext(head);
 
+        Node fast = dummy;
+        Node slow = dummy;
 
         for(int i = 0; i < n; i++){
+            if(fast == null) return null;
             fast = fast.getNext();
         }
+
         while(fast.getNext() != null){
             fast = fast.getNext();
             slow = slow.getNext();
         }
-        // slows next is now the one we want gone
-        Node nNode = slow.getNext();
-        Node temp = nNode.getNext();
-        slow.setNext(temp);
 
-        dummy = dummy.getNext();
-        return dummy;
+        // slows next is now the one we want gone
+        Node nthNode = slow.getNext();
+        slow.setNext(nthNode.getNext());
+
+        return dummy.getNext();
 
     }
 
@@ -284,6 +343,8 @@ public class Main {
         myList3.print();
         LinkedListController.bubbleSort(myList3.getHead());
         myList3.print();
+
+        System.out.println(LinkedListController.wholeInteger(myList3.getHead()));
 
 
         return;

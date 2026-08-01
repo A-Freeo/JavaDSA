@@ -15,7 +15,11 @@ Data-structures and algorithms practice in Java. Currently a hand-implemented si
 | `bubbleSort` | Sort the list in place |
 | `findMedSorted` | Median of two lists |
 | `removeNthFromEnd` | Remove the Nth node from the end |
+| `printNthNodeFromEnd` | Print the Nth node from the end |
 | `addTwoLists` | Add two numbers stored as lists |
+| `wholeInteger` | Read the list's digits as one integer |
+| `reverse` | Reverse the list |
+| `findCycle` | Detect a cycle (fast/slow pointers) |
 
 ## Build & run
 
@@ -28,8 +32,10 @@ java Main
 
 Linked-list problems to add next:
 
-- [ ] Reverse a linked list (iterative and recursive)
-- [ ] Detect a cycle (fast/slow pointers) and find where it starts
+- [x] Reverse a linked list (iterative)
+- [ ] Reverse a linked list (recursive)
+- [x] Detect a cycle (fast/slow pointers)
+- [ ] Find where the cycle starts
 - [ ] Find the middle node
 - [ ] Merge two sorted lists
 - [ ] Palindrome check
@@ -42,4 +48,4 @@ Then branch into new structures:
 
 ## Some constraints
 
-- `removeNthFromEnd` doesn't handle edge cases yet — removing the head (`n` equals the list length) or an out-of-range `n` (larger than the list) will misbehave or throw.
+- `removeNthFromEnd` handles removing the head and a large out-of-range `n` (returns null), but `n` exactly one past the list length still throws — an off-by-one in the guard.
