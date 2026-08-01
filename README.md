@@ -45,7 +45,3 @@ Then branch into new structures:
 - [ ] Stack and Queue (built on the linked list)
 - [ ] Binary search tree — insert, search, and traversals
 - [ ] Hash map from scratch (buckets + collision handling)
-
-## Some constraints
-
-- `removeNthFromEnd` handles removing the head and a large out-of-range `n` (returns null), but `n` exactly one past the list length still throws — an off-by-one in the guard.

@@ -233,8 +233,8 @@ final class LinkedListController{
         Node slow = dummy;
 
         for(int i = 0; i < n; i++){
-            if(fast == null) return null;
             fast = fast.getNext();
+            if(fast == null) return dummy.getNext();   // n is bigger than the list -> nothing to remove
         }
 
         while(fast.getNext() != null){
