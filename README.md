@@ -4,10 +4,10 @@ Data-structures and algorithms practice in Java. Currently a hand-implemented si
 
 ## What's here
 
-`Main.java` contains:
+Each class is in its own file:
 
-- **Node / LinkedList** — a singly linked list with add, print, and head access.
-- **LinkedListController** — static algorithms over the list, grouped by category:
+- **`Node.java` / `LinkedList.java`** — a singly linked list with add, print, and head access.
+- **`LinkedListController.java`** — static algorithms over the list, grouped by category:
 
 | Method | Problem |
 |---|---|
@@ -25,12 +25,12 @@ Data-structures and algorithms practice in Java. Currently a hand-implemented si
 | `addTwoLists` | Add two numbers stored as lists |
 | `findMedSorted` | Median of two lists |
 
-`main()` runs a labeled demo of each of these.
+- **`Main.java`** — the driver; runs a labeled demo of each method.
 
 ## Build & run
 
 ```
-javac Main.java
+javac *.java
 java Main
 ```
 
