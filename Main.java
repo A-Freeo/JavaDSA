@@ -6,6 +6,7 @@ import java.util.Vector;
 
 
 class Node {
+    
 
     private Node next;
     private int value;
@@ -89,78 +90,8 @@ class LinkedList {
 
 final class LinkedListController{
     private LinkedListController() {}
-    public static void findTwo(Node head, int target){
-        HashMap<Integer,Integer> map = new HashMap<>();
-        Node temp = head;
-        int i = 0;
-        while(temp != null){
-            int needed = target - temp.getValue();
 
-            if(map.containsKey(needed)){
-                System.out.println(map.get(needed) + ", " + i);
-            }
-            map.put(temp.getValue(), i);
-            temp = temp.getNext();
-            i++;
-        }
-    }
-
-    public static int wholeInteger(Node head){
-        Node temp = head;
-        int sum = 0;
-        while(temp != null){
-            sum = (sum * 10) + temp.getValue();
-            temp = temp.getNext();
-        }
-        return sum;
-    }
-
-    public static void reverse(Node head){
-        Node prev = null;
-        Node current = head;
-        Node next = null;
-        while(current != null){
-            next = current.getNext();
-            current.setNext(prev);
-            prev = current;
-            current = next;
-
-        }
-        head = prev;
-    }
-
-
-    public static boolean findCycle(Node head){
-        Node slow = head;
-        Node fast = head;
-        while(fast != null && fast.getNext() != null){
-            slow = slow.getNext();
-            fast = fast.getNext().getNext();
-            if(slow == fast){
-                System.out.println("Cycle detected");
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static void printNthNodeFromEnd(Node head, int n){
-        Node slow = head;
-        Node fast = head;
-        if(findCycle(head)) return;
-        for(int i = 0; i < n; i++){
-            if(fast == null) return;
-            fast = fast.getNext();
-        }
-        while(fast != null){
-            // fast.getNext() would be for having slow be one before the target 
-            slow = slow.getNext();
-            fast = fast.getNext();
-        }
-        System.out.println(slow.getValue());
-
-    }
-
+    // ---- Sorting ----
     public static void bubbleSort(Node head){
         if(head == null || head.getNext() == null) return;
 
@@ -186,41 +117,60 @@ final class LinkedListController{
         }while (swap);
     }
 
+    // ---- Reversal ----
+    public static void reverse(Node head){
+        Node prev = null;
+        Node current = head;
+        Node next = null;
+        while(current != null){
+            next = current.getNext();
+            current.setNext(prev);
+            prev = current;
+            current = next;
 
+        }
+        head = prev;
+    }
 
-    public static void findMedSorted(Node head1, Node head2){
-        Node i = head1;
-        Node j = head2;
-        // auto sorts lists
-        bubbleSort(i);
-        bubbleSort(j);
+    public static Node reverseListRecursive(Node head){
 
-        Vector<Integer> values = new Vector<>();
-
-        while(i != null && j != null){
-            values.add(i.getValue());
-            values.add(j.getValue());
-            i = i.getNext();
-            j = j.getNext();
+        if(head == null || head.getNext() == null){
+            return head;
         }
 
-        while(i != null){
-            values.add(i.getValue());
-            i = i.getNext();
-        }
+        Node newHead = reverseListRecursive(head.getNext());
 
-        while(j != null){
-            values.add(j.getValue());
-            j = j.getNext();
+        head.getNext().setNext(head);
+        head.setNext(null);
+
+        return newHead;
+    }
+
+    // ---- Position (two-pointer) ----
+    public static Node middleNode(Node head){
+        Node slow = head;
+        Node fast = head;
+        while(fast != null && fast.getNext() != null){
+            slow = slow.getNext();
+            fast = fast.getNext().getNext();
         }
-    
-        int n = values.size();
-        if(n % 2 == 1){
-            System.out.println(values.get(n/2));
-        }else{
-            double temp = (values.get(n/2 - 1) + values.get(n/2)) / 2.0;
-            System.out.println(temp);
+        return slow;
+    }
+
+    public static void printNthNodeFromEnd(Node head, int n){
+        Node slow = head;
+        Node fast = head;
+        if(findCycle(head)) return;
+        for(int i = 0; i < n; i++){
+            if(fast == null) return;
+            fast = fast.getNext();
         }
+        while(fast != null){
+            // fast.getNext() would be for having slow be one before the target
+            slow = slow.getNext();
+            fast = fast.getNext();
+        }
+        System.out.println(slow.getValue());
 
     }
 
@@ -234,7 +184,7 @@ final class LinkedListController{
 
         for(int i = 0; i < n; i++){
             fast = fast.getNext();
-            if(fast == null) return dummy.getNext();   // n is bigger than the list -> nothing to remove
+            if(fast == null) return dummy.getNext();
         }
 
         while(fast.getNext() != null){
@@ -248,6 +198,109 @@ final class LinkedListController{
 
         return dummy.getNext();
 
+    }
+
+    // ---- Cycle detection ----
+    public static boolean findCycle(Node head){
+        Node slow = head;
+        Node fast = head;
+        while(fast != null && fast.getNext() != null){
+            slow = slow.getNext();
+            fast = fast.getNext().getNext();
+            if(slow == fast){
+                System.out.println("Cycle detected");
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static Node findCycleStart(Node head){
+        Node slow = head;
+        Node fast = head;
+        boolean hasCycle = false;
+
+        while(fast != null && fast.getNext() != null){
+            slow = slow.getNext();
+            fast = fast.getNext().getNext();
+            if(slow == fast){
+                hasCycle = true;
+                break;
+            }
+        }
+
+        if(!hasCycle) return null;
+        slow = head;
+        while(slow != fast){
+            slow = slow.getNext();
+            fast = fast.getNext();
+        }
+        return slow;
+    }
+
+    // ---- Reading / queries ----
+    public static int wholeInteger(Node head){
+        Node temp = head;
+        int sum = 0;
+        while(temp != null){
+            sum = (sum * 10) + temp.getValue();
+            temp = temp.getNext();
+        }
+        return sum;
+    }
+
+    public static void findTwo(Node head, int target){
+        HashMap<Integer,Integer> map = new HashMap<>();
+        Node temp = head;
+        int i = 0;
+        while(temp != null){
+            int needed = target - temp.getValue();
+
+            if(map.containsKey(needed)){
+                System.out.println(map.get(needed) + ", " + i);
+            }
+            map.put(temp.getValue(), i);
+            temp = temp.getNext();
+            i++;
+        }
+    }
+
+    public static boolean isPalindrome(Node head){
+        if(head == null || head.getNext() == null) return true;
+        Node mid = middleNode(head);
+        Node secondHalf = reverseListRecursive(mid);
+        Node firstHalf = head;
+        while(secondHalf != null){
+            if(firstHalf.getValue() != secondHalf.getValue()) return false;
+            firstHalf = firstHalf.getNext();
+            secondHalf = secondHalf.getNext();
+        }
+        return true;
+    }
+
+    // ---- Two-list operations ----
+    public static Node mergeTwoLists(Node head1, Node head2){
+        bubbleSort(head1);
+        bubbleSort(head2);
+
+        Node dummy = new Node(0);
+        Node tail = dummy;
+        Node p1 = head1;
+        Node p2 = head2;
+
+        while(p1 != null && p2 != null){
+            if(p1.getValue() < p2.getValue()){
+                tail.setNext(p1);
+                p1 = p1.getNext();
+            }else{
+                tail.setNext(p2);
+                p2 = p2.getNext();
+            }
+            tail = tail.getNext();
+        }
+        if(p1 != null) tail.setNext(p1);
+        if(p2 != null) tail.setNext(p2);
+        return dummy.getNext();
     }
 
     public static Node addTwoLists(Node head1, Node head2){
@@ -286,68 +339,117 @@ final class LinkedListController{
 
         return head;
     }
+
+    public static void findMedSorted(Node head1, Node head2){
+        Node i = head1;
+        Node j = head2;
+        // auto sorts lists
+        bubbleSort(i);
+        bubbleSort(j);
+
+        Vector<Integer> values = new Vector<>();
+
+        while(i != null && j != null){
+            values.add(i.getValue());
+            values.add(j.getValue());
+            i = i.getNext();
+            j = j.getNext();
+        }
+
+        while(i != null){
+            values.add(i.getValue());
+            i = i.getNext();
+        }
+
+        while(j != null){
+            values.add(j.getValue());
+            j = j.getNext();
+        }
+
+        int n = values.size();
+        if(n % 2 == 1){
+            System.out.println(values.get(n/2));
+        }else{
+            double temp = (values.get(n/2 - 1) + values.get(n/2)) / 2.0;
+            System.out.println(temp);
+        }
+
+    }
 }
 
 public class Main {
 
+    // build a list from the given values, in order
+    static LinkedList build(int... values){
+        LinkedList list = new LinkedList();
+        for(int v : values) list.add(v);
+        return list;
+    }
+
     public static void main(String[] args) {
-        LinkedList myList = new LinkedList();
-        LinkedList myList2 = new LinkedList();
 
-        myList.add(0);
-        myList.add(1);
-        myList.add(2);
-        myList.add(3);
-        myList.add(4);
-        myList.add(5);
-        myList.add(6);
-        myList.add(7);
-        myList.add(8);
-        myList.add(9);
+        System.out.println("=== print / printENG ===");
+        LinkedList list = build(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+        list.print();
+        list.printENG();
 
-        myList2.add(0);
-        myList2.add(1);
-        myList2.add(2);
-        myList2.add(3);
-        myList2.add(4);
-        myList2.add(5);
-        myList2.add(6);
-        myList2.add(7);
-        myList2.add(8);
-        myList2.add(9);
+        System.out.println("\n=== wholeInteger ===");
+        System.out.println(LinkedListController.wholeInteger(build(1, 2, 3, 4).getHead()));
 
+        System.out.println("\n=== findTwo (target 5) ===");
+        LinkedListController.findTwo(build(0, 1, 2, 3, 4, 5).getHead(), 5);
 
-        myList.printENG();
-        myList.print();
+        System.out.println("\n=== bubbleSort ===");
+        LinkedList unsorted = build(5, 3, 1, 2, 7);
+        unsorted.print();
+        LinkedListController.bubbleSort(unsorted.getHead());
+        unsorted.print();
 
-        LinkedListController.findTwo(myList.getHead(), 5);
-        LinkedListController.findMedSorted(myList.getHead(), myList2.getHead());
-        myList.setHead(LinkedListController.removeNthFromEnd(myList.getHead(), 2));
-        myList.print();
+        System.out.println("\n=== reverseListRecursive ===");
+        LinkedList toReverse = build(1, 2, 3, 4, 5);
+        toReverse.print();
+        toReverse.setHead(LinkedListController.reverseListRecursive(toReverse.getHead()));
+        toReverse.print();
 
-        LinkedList combinedList = new LinkedList();
-        combinedList.setHead(LinkedListController.addTwoLists(myList.getHead(), myList2.getHead()));
-        myList.print();
-        myList2.print();
-        combinedList.print();
+        System.out.println("\n=== middleNode ===");
+        System.out.println(LinkedListController.middleNode(build(1, 2, 3, 4, 5).getHead()).getValue());
 
-        System.out.println();
+        System.out.println("\n=== printNthNodeFromEnd (n=2) ===");
+        LinkedListController.printNthNodeFromEnd(build(1, 2, 3, 4, 5).getHead(), 2);
 
-        LinkedList myList3 = new LinkedList();
-        myList3.add(5);
-        myList3.add(3);
-        myList3.add(1);
-        myList3.add(2);
-        myList3.add(7);
+        System.out.println("\n=== removeNthFromEnd (n=2) ===");
+        LinkedList toRemove = build(1, 2, 3, 4, 5);
+        toRemove.setHead(LinkedListController.removeNthFromEnd(toRemove.getHead(), 2));
+        toRemove.print();
 
-        myList3.print();
-        LinkedListController.bubbleSort(myList3.getHead());
-        myList3.print();
+        System.out.println("\n=== findCycle ===");
+        System.out.println("no cycle -> " + LinkedListController.findCycle(build(1, 2, 3, 4, 5).getHead()));
+        LinkedList cyclic = build(1, 2, 3, 4, 5);
+        Node cHead = cyclic.getHead();
+        Node cTail = cHead;
+        while(cTail.getNext() != null) cTail = cTail.getNext();
+        cTail.setNext(cHead.getNext().getNext());          // 5 -> node holding 3, makes a cycle
+        System.out.println("with cycle -> " + LinkedListController.findCycle(cHead));
 
-        System.out.println(LinkedListController.wholeInteger(myList3.getHead()));
+        System.out.println("\n=== findCycleStart ===");
+        System.out.println(LinkedListController.findCycleStart(cHead).getValue());
 
+        System.out.println("\n=== mergeTwoLists ===");
+        LinkedList merged = new LinkedList();
+        merged.setHead(LinkedListController.mergeTwoLists(build(1, 4, 5).getHead(), build(2, 3, 6).getHead()));
+        merged.print();
 
-        return;
+        System.out.println("\n=== addTwoLists (342 + 465) ===");
+        LinkedList sum = new LinkedList();
+        sum.setHead(LinkedListController.addTwoLists(build(2, 4, 3).getHead(), build(5, 6, 4).getHead()));
+        sum.print();
+
+        System.out.println("\n=== isPalindrome ===");
+        System.out.println("1 2 3 2 1 -> " + LinkedListController.isPalindrome(build(1, 2, 3, 2, 1).getHead()));
+        System.out.println("1 2 3 4   -> " + LinkedListController.isPalindrome(build(1, 2, 3, 4).getHead()));
+
+        System.out.println("\n=== findMedSorted ===");
+        LinkedListController.findMedSorted(build(1, 3, 8).getHead(), build(7, 9, 2).getHead());
     }
 
 }

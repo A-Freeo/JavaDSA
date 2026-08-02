@@ -7,19 +7,25 @@ Data-structures and algorithms practice in Java. Currently a hand-implemented si
 `Main.java` contains:
 
 - **Node / LinkedList** — a singly linked list with add, print, and head access.
-- **LinkedListController** — static algorithms over the list:
+- **LinkedListController** — static algorithms over the list, grouped by category:
 
 | Method | Problem |
 |---|---|
-| `findTwo` | Two-sum (find a pair adding to a target) |
 | `bubbleSort` | Sort the list in place |
-| `findMedSorted` | Median of two lists |
-| `removeNthFromEnd` | Remove the Nth node from the end |
+| `reverse` / `reverseListRecursive` | Reverse the list (iterative / recursive) |
+| `middleNode` | Find the middle node |
 | `printNthNodeFromEnd` | Print the Nth node from the end |
-| `addTwoLists` | Add two numbers stored as lists |
-| `wholeInteger` | Read the list's digits as one integer |
-| `reverse` | Reverse the list |
+| `removeNthFromEnd` | Remove the Nth node from the end |
 | `findCycle` | Detect a cycle (fast/slow pointers) |
+| `findCycleStart` | Find where a cycle begins |
+| `wholeInteger` | Read the list's digits as one integer |
+| `findTwo` | Two-sum (find a pair adding to a target) |
+| `isPalindrome` | Check if the list is a palindrome |
+| `mergeTwoLists` | Merge two sorted lists |
+| `addTwoLists` | Add two numbers stored as lists |
+| `findMedSorted` | Median of two lists |
+
+`main()` runs a labeled demo of each of these.
 
 ## Build & run
 
@@ -30,17 +36,17 @@ java Main
 
 ## Roadmap
 
-Linked-list problems to add next:
+Linked-list problems:
 
 - [x] Reverse a linked list (iterative)
-- [ ] Reverse a linked list (recursive)
+- [x] Reverse a linked list (recursive)
 - [x] Detect a cycle (fast/slow pointers)
-- [ ] Find where the cycle starts
-- [ ] Find the middle node
-- [ ] Merge two sorted lists
-- [ ] Palindrome check
+- [x] Find where the cycle starts
+- [x] Find the middle node
+- [x] Merge two sorted lists
+- [x] Palindrome check
 
-Then branch into new structures:
+Next, branch into new structures:
 
 - [ ] Stack and Queue (built on the linked list)
 - [ ] Binary search tree — insert, search, and traversals
