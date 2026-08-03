@@ -1,18 +1,17 @@
-import java.util.HashMap;
 import java.util.Vector;
 
 public final class LinkedListController{
     private LinkedListController() {}
 
     // ---- Sorting ----
-    public static void bubbleSort(Node head){
+    public static void bubbleSort(Node<Integer> head){
         if(head == null || head.getNext() == null) return;
 
         boolean swap;
 
         do{
             swap = false;
-            Node current = head;
+            Node<Integer> current = head;
 
             while(current.getNext() != null){
                 int value1 = current.getValue();
@@ -31,10 +30,10 @@ public final class LinkedListController{
     }
 
     // ---- Reversal ----
-    public static void reverse(Node head){
-        Node prev = null;
-        Node current = head;
-        Node next = null;
+    public static void reverse(Node<Integer> head){
+        Node<Integer> prev = null;
+        Node<Integer> current = head;
+        Node<Integer> next = null;
         while(current != null){
             next = current.getNext();
             current.setNext(prev);
@@ -45,13 +44,13 @@ public final class LinkedListController{
         head = prev;
     }
 
-    public static Node reverseListRecursive(Node head){
+    public static Node<Integer> reverseListRecursive(Node<Integer> head){
 
         if(head == null || head.getNext() == null){
             return head;
         }
 
-        Node newHead = reverseListRecursive(head.getNext());
+        Node<Integer> newHead = reverseListRecursive(head.getNext());
 
         head.getNext().setNext(head);
         head.setNext(null);
@@ -60,9 +59,9 @@ public final class LinkedListController{
     }
 
     // ---- Position (two-pointer) ----
-    public static Node middleNode(Node head){
-        Node slow = head;
-        Node fast = head;
+    public static Node<Integer> middleNode(Node<Integer> head){
+        Node<Integer> slow = head;
+        Node<Integer> fast = head;
         while(fast != null && fast.getNext() != null){
             slow = slow.getNext();
             fast = fast.getNext().getNext();
@@ -70,9 +69,9 @@ public final class LinkedListController{
         return slow;
     }
 
-    public static void printNthNodeFromEnd(Node head, int n){
-        Node slow = head;
-        Node fast = head;
+    public static void printNthNodeFromEnd(Node<Integer> head, int n){
+        Node<Integer> slow = head;
+        Node<Integer> fast = head;
         if(findCycle(head)) return;
         for(int i = 0; i < n; i++){
             if(fast == null) return;
@@ -87,13 +86,13 @@ public final class LinkedListController{
 
     }
 
-    public static Node removeNthFromEnd(Node head, int n){
+    public static Node<Integer> removeNthFromEnd(Node<Integer> head, int n){
 
-        Node dummy = new Node(0);
+        Node<Integer> dummy = new Node<>(0);
         dummy.setNext(head);
 
-        Node fast = dummy;
-        Node slow = dummy;
+        Node<Integer> fast = dummy;
+        Node<Integer> slow = dummy;
 
         for(int i = 0; i < n; i++){
             fast = fast.getNext();
@@ -106,7 +105,7 @@ public final class LinkedListController{
         }
 
         // slows next is now the one we want gone
-        Node nthNode = slow.getNext();
+        Node<Integer> nthNode = slow.getNext();
         slow.setNext(nthNode.getNext());
 
         return dummy.getNext();
@@ -114,9 +113,9 @@ public final class LinkedListController{
     }
 
     // ---- Cycle detection ----
-    public static boolean findCycle(Node head){
-        Node slow = head;
-        Node fast = head;
+    public static boolean findCycle(Node<Integer> head){
+        Node<Integer> slow = head;
+        Node<Integer> fast = head;
         while(fast != null && fast.getNext() != null){
             slow = slow.getNext();
             fast = fast.getNext().getNext();
@@ -128,9 +127,9 @@ public final class LinkedListController{
         return false;
     }
 
-    public static Node findCycleStart(Node head){
-        Node slow = head;
-        Node fast = head;
+    public static Node<Integer> findCycleStart(Node<Integer> head){
+        Node<Integer> slow = head;
+        Node<Integer> fast = head;
         boolean hasCycle = false;
 
         while(fast != null && fast.getNext() != null){
@@ -152,8 +151,8 @@ public final class LinkedListController{
     }
 
     // ---- Reading / queries ----
-    public static int wholeInteger(Node head){
-        Node temp = head;
+    public static int wholeInteger(Node<Integer> head){
+        Node<Integer> temp = head;
         int sum = 0;
         while(temp != null){
             sum = (sum * 10) + temp.getValue();
@@ -162,9 +161,9 @@ public final class LinkedListController{
         return sum;
     }
 
-    public static void findTwo(Node head, int target){
-        HashMap<Integer,Integer> map = new HashMap<>();
-        Node temp = head;
+    public static void findTwo(Node<Integer> head, int target){
+        Map<Integer,Integer> map = new Map<>();
+        Node<Integer> temp = head;
         int i = 0;
         while(temp != null){
             int needed = target - temp.getValue();
@@ -178,11 +177,11 @@ public final class LinkedListController{
         }
     }
 
-    public static boolean isPalindrome(Node head){
+    public static boolean isPalindrome(Node<Integer> head){
         if(head == null || head.getNext() == null) return true;
-        Node mid = middleNode(head);
-        Node secondHalf = reverseListRecursive(mid);
-        Node firstHalf = head;
+        Node<Integer> mid = middleNode(head);
+        Node<Integer> secondHalf = reverseListRecursive(mid);
+        Node<Integer> firstHalf = head;
         while(secondHalf != null){
             if(firstHalf.getValue() != secondHalf.getValue()) return false;
             firstHalf = firstHalf.getNext();
@@ -192,14 +191,14 @@ public final class LinkedListController{
     }
 
     // ---- Two-list operations ----
-    public static Node mergeTwoLists(Node head1, Node head2){
+    public static Node<Integer> mergeTwoLists(Node<Integer> head1, Node<Integer> head2){
         bubbleSort(head1);
         bubbleSort(head2);
 
-        Node dummy = new Node(0);
-        Node tail = dummy;
-        Node p1 = head1;
-        Node p2 = head2;
+        Node<Integer> dummy = new Node<>(0);
+        Node<Integer> tail = dummy;
+        Node<Integer> p1 = head1;
+        Node<Integer> p2 = head2;
 
         while(p1 != null && p2 != null){
             if(p1.getValue() < p2.getValue()){
@@ -216,12 +215,12 @@ public final class LinkedListController{
         return dummy.getNext();
     }
 
-    public static Node addTwoLists(Node head1, Node head2){
-        Node tempHead1 = head1;
-        Node tempHead2 = head2;
+    public static Node<Integer> addTwoLists(Node<Integer> head1, Node<Integer> head2){
+        Node<Integer> tempHead1 = head1;
+        Node<Integer> tempHead2 = head2;
 
-        Node head = null;
-        Node tail = null;
+        Node<Integer> head = null;
+        Node<Integer> tail = null;
         int carry = 0;
 
         while(tempHead1 != null || tempHead2 != null || carry != 0){
@@ -232,7 +231,7 @@ public final class LinkedListController{
             int digitValue = totalSum % 10;
             carry = totalSum / 10;
 
-            Node tempNode = new Node(digitValue);
+            Node<Integer> tempNode = new Node<> (digitValue);
             if(head == null){
                 head = tempNode;
                 tail = head;
@@ -253,9 +252,9 @@ public final class LinkedListController{
         return head;
     }
 
-    public static void findMedSorted(Node head1, Node head2){
-        Node i = head1;
-        Node j = head2;
+    public static void findMedSorted(Node<Integer> head1, Node<Integer> head2){
+        Node<Integer> i = head1;
+        Node<Integer> j = head2;
         // auto sorts lists
         bubbleSort(i);
         bubbleSort(j);
@@ -287,5 +286,28 @@ public final class LinkedListController{
             System.out.println(temp);
         }
 
+    }
+
+    // --- Printing ---
+    public static void printENG(Node<Integer> head) {
+        Node<Integer> temp = head;
+        int i = 1;
+        while (temp != null) {
+            System.out.println("Node " + i + " = " + temp.getValue());
+            temp = temp.getNext();
+            i++;
+        }
+    }
+
+    public static void print(Node<Integer> head) {
+        Node<Integer> temp = head;
+        System.out.print("[");
+
+        while (temp != null) {
+            System.out.print(temp.getValue());
+            temp = temp.getNext();
+            if (temp != null) System.out.print(", ");
+        }
+        System.out.println("]");
     }
 }

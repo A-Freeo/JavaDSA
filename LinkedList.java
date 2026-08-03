@@ -1,22 +1,22 @@
 public class LinkedList {
-    private Node head;
+    private Node<Integer> head;
 
     public LinkedList() {
         head = null;
     }
 
-    public void setHead(Node head){
+    public void setHead(Node<Integer> head){
         this.head = head;
     }
 
-    public Node getHead(){
+    public Node<Integer> getHead(){
         return head;
     }
 
     public void add(int value) {
-        Node temp = head;
+        Node<Integer> temp = head;
         if (temp == null) {
-            Node newNode = new Node(value);
+            Node<Integer> newNode = new Node<>(value);
             head = newNode;
             return;
         }
@@ -24,30 +24,8 @@ public class LinkedList {
         while (temp.getNext() != null) {
             temp = temp.getNext();
         }
-        Node newNode = new Node(value);
+        Node<Integer> newNode = new Node<>(value);
         temp.setNext(newNode);
         return;
-    }
-
-    public void printENG() {
-        Node temp = head;
-        int i = 1;
-        while (temp != null) {
-            System.out.println("Node " + i + " = " + temp.getValue());
-            temp = temp.getNext();
-            i++;
-        }
-    }
-
-    public void print() {
-        Node temp = head;
-        System.out.print("[");
-
-        while (temp != null) {
-            System.out.print(temp.getValue());
-            temp = temp.getNext();
-            if (temp != null) System.out.print(", ");
-        }
-        System.out.println("]");
     }
 }
