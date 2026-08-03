@@ -1,13 +1,17 @@
 # JavaDSA
 
-Data-structures and algorithms practice in Java. Currently a hand-implemented singly linked list plus a set of classic linked-list problems, built to practice pointer manipulation and common interview patterns.
+Data-structures and algorithms practice in Java — hand-implemented linked list, stack, and hash map, plus a set of classic problems over them, built to practice pointer manipulation and common interview patterns.
 
 ## What's here
 
 Each class is in its own file:
 
-- **`Node.java` / `LinkedList.java`** — a singly linked list with add, print, and head access.
-- **`LinkedListController.java`** — static algorithms over the list, grouped by category:
+- **Linked list** — `Node.java` (generic `Node<T>`), `LinkedList.java`, and `LinkedListController.java` (static algorithms, table below).
+- **Stack** — `Stack.java` (generic, built on `Node`) with `StackController.java` — reverse, valid brackets, next greater element.
+- **Hash map** — `Map.java` + `Entry.java` — an array of buckets with separate chaining: `put`, `get`, `remove`, `containsKey`, `containsValue`.
+- **`Main.java`** — the driver; runs a labeled demo of the linked-list methods.
+
+### LinkedListController methods
 
 | Method | Problem |
 |---|---|
@@ -24,8 +28,6 @@ Each class is in its own file:
 | `mergeTwoLists` | Merge two sorted lists |
 | `addTwoLists` | Add two numbers stored as lists |
 | `findMedSorted` | Median of two lists |
-
-- **`Main.java`** — the driver; runs a labeled demo of each method.
 
 ## Build & run
 
@@ -46,8 +48,9 @@ Linked-list problems:
 - [x] Merge two sorted lists
 - [x] Palindrome check
 
-Next, branch into new structures:
+New structures:
 
-- [ ] Stack and Queue (built on the linked list)
+- [x] Stack (built on the linked list)
+- [ ] Queue (built on the linked list)
+- [x] Hash map from scratch (buckets + collision handling)
 - [ ] Binary search tree — insert, search, and traversals
-- [ ] Hash map from scratch (buckets + collision handling)
