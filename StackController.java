@@ -3,7 +3,7 @@ public final class StackController {
 
     public static <T> Stack<T> reverse(Stack<T> stack){
         Stack<T> reversed = new Stack<>();
-        while(!stack.empty()){
+        while(!stack.isEmpty()){
             reversed.push(stack.pop());
         }
         return reversed;
@@ -15,12 +15,12 @@ public final class StackController {
             if(c == '(' || c == '{' || c == '['){
                 stack.push(c);
             } else {
-                if(stack.empty()) return false;
+                if(stack.isEmpty()) return false;
                 char top = stack.pop();
                 if((c == ')' && top != '(') || (c == '}' && top != '{') || (c == ']' && top != '[')) return false;
             }
         }
-        return stack.empty();
+        return stack.isEmpty();
     }
 
 
@@ -31,13 +31,13 @@ public final class StackController {
 
         for(int i = 0; i < n; i++){
 
-            while(!stack.empty() && nums[stack.peek()] < nums[i]){
+            while(!stack.isEmpty() && nums[stack.peek()] < nums[i]){
                 result[stack.pop()] = nums[i];
             }
             stack.push(i);
         }
 
-        while(!stack.empty()){
+        while(!stack.isEmpty()){
             result[stack.pop()] = -1;
         }
         return result;
@@ -46,9 +46,9 @@ public final class StackController {
     public static void print(Stack<?> stack){
         Stack<?> temp = reverse(stack);
         System.out.print("[");
-        while(!temp.empty()){
+        while(!temp.isEmpty()){
             System.out.print(temp.pop());
-            if(!temp.empty()) System.out.print(", ");
+            if(!temp.isEmpty()) System.out.print(", ");
         }
         System.out.println("]");
     }

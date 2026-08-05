@@ -21,7 +21,7 @@ public class Stack<T> {
     }
 
 
-    public boolean empty(){
+    public boolean isEmpty(){
         return head == null;
     }
 
