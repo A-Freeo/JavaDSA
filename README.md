@@ -1,6 +1,6 @@
 # JavaDSA
 
-Data-structures and algorithms practice in Java — hand-implemented linked list, stack, queue, and hash map, each with a "controller" of classic algorithms, built to practice pointer manipulation and common interview patterns.
+Data-structures and algorithms practice in Java — hand-implemented linked list, stack, queue, hash map, and binary search tree, each with a "controller" of classic algorithms, built to practice pointer manipulation and common interview patterns.
 
 ## What's here
 
@@ -10,6 +10,7 @@ Each class is in its own file:
 - **Stack** — `Stack.java` (generic, built on `Node`) with `StackController.java` — reverse, valid brackets, next greater element.
 - **Queue** — `Queue.java` (generic, head + tail pointers) with `QueueController.java` — reverse, reverseFirstK, interleave.
 - **Hash map** — `Map.java` + `Entry.java` — an array of buckets with separate chaining (`put`, `get`, `remove`, `containsKey`, `containsValue`) — with `MapController.java` — twoSum, mostFrequent, containsDuplicate, isAnagram.
+- **Binary search tree** — `TreeNode.java` + `BinarySearchTree.java` (core ops: `insert`, `search`, `delete`, `min`, `max`) with `BinarySearchTreeController.java` (static algorithms, table below).
 - **`Main.java`** — the driver; runs a labeled demo of the linked-list methods.
 
 ### LinkedListController methods
@@ -29,6 +30,20 @@ Each class is in its own file:
 | `mergeTwoLists` | Merge two sorted lists |
 | `addTwoLists` | Add two numbers stored as lists |
 | `findMedSorted` | Median of two lists |
+
+### BinarySearchTreeController methods
+
+| Method | Problem |
+|---|---|
+| `preOrder` / `inOrder` / `postOrder` | Recursive depth-first traversals (in-order prints sorted) |
+| `levelOrder` | Breadth-first traversal, level by level (uses the `Queue`) |
+| `height` | Height of the tree |
+| `size` | Count every node |
+| `countLeaves` | Count nodes with no children |
+| `invert` | Mirror the tree left-to-right |
+| `isValidBST` | Verify the ordering holds via min/max bounds |
+| `lowestCommonAncestor` | Lowest node that two values share as an ancestor |
+| `kthSmallest` | Kth smallest value (in-order + counter) |
 
 ## Build & run
 
@@ -54,4 +69,12 @@ New structures:
 - [x] Stack (built on the linked list)
 - [x] Queue (built on the linked list)
 - [x] Hash map from scratch (buckets + collision handling)
-- [ ] Binary search tree — insert, search, and traversals
+- [x] Binary search tree — insert, search, delete, traversals, and classic queries
+
+Next up:
+
+- [ ] Dynamic array (`ArrayList` from scratch) — raw backing array + resize-on-grow
+- [ ] Min-heap / priority queue — array-backed, sift-up/sift-down
+- [ ] Graph — adjacency list with BFS and DFS
+- [ ] Trie — prefix tree for string lookups
+- [ ] Self-balancing BST (AVL or red-black) — keep the tree height-balanced on insert/delete
