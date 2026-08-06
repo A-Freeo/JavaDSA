@@ -1,6 +1,6 @@
 # JavaDSA
 
-Data-structures and algorithms practice in Java — hand-implemented linked list, stack, and hash map, plus a set of classic problems over them, built to practice pointer manipulation and common interview patterns.
+Data-structures and algorithms practice in Java — hand-implemented linked list, stack, queue, and hash map, each with a "controller" of classic algorithms, built to practice pointer manipulation and common interview patterns.
 
 ## What's here
 
@@ -8,7 +8,8 @@ Each class is in its own file:
 
 - **Linked list** — `Node.java` (generic `Node<T>`), `LinkedList.java`, and `LinkedListController.java` (static algorithms, table below).
 - **Stack** — `Stack.java` (generic, built on `Node`) with `StackController.java` — reverse, valid brackets, next greater element.
-- **Hash map** — `Map.java` + `Entry.java` — an array of buckets with separate chaining: `put`, `get`, `remove`, `containsKey`, `containsValue`.
+- **Queue** — `Queue.java` (generic, head + tail pointers) with `QueueController.java` — reverse, reverseFirstK, interleave.
+- **Hash map** — `Map.java` + `Entry.java` — an array of buckets with separate chaining (`put`, `get`, `remove`, `containsKey`, `containsValue`) — with `MapController.java` — twoSum, mostFrequent, containsDuplicate, isAnagram.
 - **`Main.java`** — the driver; runs a labeled demo of the linked-list methods.
 
 ### LinkedListController methods
@@ -51,6 +52,6 @@ Linked-list problems:
 New structures:
 
 - [x] Stack (built on the linked list)
-- [ ] Queue (built on the linked list)
+- [x] Queue (built on the linked list)
 - [x] Hash map from scratch (buckets + collision handling)
 - [ ] Binary search tree — insert, search, and traversals
