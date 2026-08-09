@@ -1,6 +1,6 @@
 # JavaDSA
 
-Data-structures and algorithms practice in Java — hand-implemented linked list, stack, queue, hash map, and binary search tree, each with a "controller" of classic algorithms, built to practice pointer manipulation and common interview patterns.
+Data-structures and algorithms practice in Java — hand-implemented linked list, stack, queue, hash map, binary search tree, and dynamic array, each with a "controller" of classic algorithms, built to practice pointer manipulation and common interview patterns.
 
 ## What's here
 
@@ -11,6 +11,7 @@ Each class is in its own file:
 - **Queue** — `Queue.java` (generic, head + tail pointers) with `QueueController.java` — reverse, reverseFirstK, interleave.
 - **Hash map** — `Map.java` + `Entry.java` — an array of buckets with separate chaining (`put`, `get`, `remove`, `containsKey`, `containsValue`) — with `MapController.java` — twoSum, mostFrequent, containsDuplicate, isAnagram.
 - **Binary search tree** — `TreeNode.java` + `BinarySearchTree.java` (core ops: `insert`, `search`, `delete`, `min`, `max`) with `BinarySearchTreeController.java` (static algorithms, table below).
+- **Dynamic array** — `ArrayList.java` — a generic array-backed list that grows itself by doubling capacity (`add`, `get`, `set`, `remove`, `indexOf`, `size`, `isEmpty`).
 - **`Main.java`** — the driver; runs a labeled demo of the linked-list methods.
 
 ### LinkedListController methods
@@ -70,10 +71,10 @@ New structures:
 - [x] Queue (built on the linked list)
 - [x] Hash map from scratch (buckets + collision handling)
 - [x] Binary search tree — insert, search, delete, traversals, and classic queries
+- [x] Dynamic array (`ArrayList` from scratch) — raw backing array + resize-on-grow
 
 Next up:
 
-- [ ] Dynamic array (`ArrayList` from scratch) — raw backing array + resize-on-grow
 - [ ] Min-heap / priority queue — array-backed, sift-up/sift-down
 - [ ] Graph — adjacency list with BFS and DFS
 - [ ] Trie — prefix tree for string lookups
