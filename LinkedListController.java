@@ -30,7 +30,7 @@ public final class LinkedListController{
     }
 
     // ---- Reversal ----
-    public static void reverse(Node<Integer> head){
+    public static Node<Integer> reverse(Node<Integer> head){
         Node<Integer> prev = null;
         Node<Integer> current = head;
         Node<Integer> next = null;
@@ -41,7 +41,7 @@ public final class LinkedListController{
             current = next;
 
         }
-        head = prev;
+        return prev;
     }
 
     public static Node<Integer> reverseListRecursive(Node<Integer> head){
@@ -183,7 +183,7 @@ public final class LinkedListController{
         Node<Integer> secondHalf = reverseListRecursive(mid);
         Node<Integer> firstHalf = head;
         while(secondHalf != null){
-            if(firstHalf.getValue() != secondHalf.getValue()) return false;
+            if(!firstHalf.getValue().equals(secondHalf.getValue())) return false;
             firstHalf = firstHalf.getNext();
             secondHalf = secondHalf.getNext();
         }
@@ -261,11 +261,15 @@ public final class LinkedListController{
 
         Vector<Integer> values = new Vector<>();
 
+        // merge the two sorted lists in order so 'values' stays sorted
         while(i != null && j != null){
-            values.add(i.getValue());
-            values.add(j.getValue());
-            i = i.getNext();
-            j = j.getNext();
+            if(i.getValue() <= j.getValue()){
+                values.add(i.getValue());
+                i = i.getNext();
+            }else{
+                values.add(j.getValue());
+                j = j.getNext();
+            }
         }
 
         while(i != null){
