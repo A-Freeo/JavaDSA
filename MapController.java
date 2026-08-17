@@ -35,7 +35,7 @@ public class MapController {
             int needed = x - nums[i];
 
             if(map.containsKey(needed)){
-                result[0] = map.get(i);
+                result[0] = map.get(needed);
                 result[1] = i;
                 return result;
             }
