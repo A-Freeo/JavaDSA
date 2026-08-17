@@ -1,74 +1,43 @@
 # JavaDSA
 
-Data-structures and algorithms practice in Java — hand-implemented linked list, stack, queue, hash map, binary search tree, and dynamic array, each with a "controller" of classic algorithms, built to practice pointer manipulation and common interview patterns.
+Data-structures and algorithms practice in Java — each structure hand-implemented from scratch,
+with a "controller" of classic algorithms, to practice pointer manipulation, recursion, and
+common interview patterns.
 
-## What's here
+This branch (`main`) is the overview. **Each data structure lives on its own branch** with its own
+README and a self-contained, compilable set of files.
 
-Each class is in its own file:
+## Branches
 
-- **Linked list** — `Node.java` (generic `Node<T>`), `LinkedList.java`, and `LinkedListController.java` (static algorithms, table below).
-- **Stack** — `Stack.java` (generic, built on `Node`) with `StackController.java` — reverse, valid brackets, next greater element.
-- **Queue** — `Queue.java` (generic, head + tail pointers) with `QueueController.java` — reverse, reverseFirstK, interleave.
-- **Hash map** — `Map.java` + `Entry.java` — an array of buckets with separate chaining (`put`, `get`, `remove`, `containsKey`, `containsValue`) — with `MapController.java` — twoSum, mostFrequent, containsDuplicate, isAnagram.
-- **Binary search tree** — `TreeNode.java` + `BinarySearchTree.java` (core ops: `insert`, `search`, `delete`, `min`, `max`) with `BinarySearchTreeController.java` (static algorithms, table below).
-- **Dynamic array** — `ArrayList.java` — a generic array-backed list that grows itself by doubling capacity (`add`, `get`, `set`, `remove`, `indexOf`, `size`, `isEmpty`).
-- **`Main.java`** — the driver; runs a labeled demo of the linked-list methods.
+| Branch | Structure | Core files |
+|---|---|---|
+| [`LinkedList`](../../tree/LinkedList) | Singly linked list + algorithms | `Node`, `LinkedList`, `LinkedListController` |
+| [`Stack`](../../tree/Stack) | LIFO stack + algorithms | `Stack`, `StackController` |
+| [`Queue`](../../tree/Queue) | FIFO queue + algorithms | `Queue`, `QueueController` |
+| [`Map`](../../tree/Map) | Hash map (buckets + chaining) + algorithms | `Map`, `Entry`, `MapController` |
+| [`BinarySearchTree`](../../tree/BinarySearchTree) | Binary search tree + algorithms | `TreeNode`, `BinarySearchTree`, `BinarySearchTreeController` |
+| [`ArrayList`](../../tree/ArrayList) | Dynamic array (resizing) | `ArrayList` |
+| [`legacy`](../../tree/legacy) | Original `Main.java` demo driver (pre-split) | `Main` + supporting files |
 
-### LinkedListController methods
+Each structure branch also carries any supporting files it needs to compile on its own
+(e.g. `Stack` includes `Node`; `BinarySearchTree` includes `Queue` for `levelOrder`).
 
-| Method | Problem |
-|---|---|
-| `bubbleSort` | Sort the list in place |
-| `reverse` / `reverseListRecursive` | Reverse the list (iterative / recursive) |
-| `middleNode` | Find the middle node |
-| `printNthNodeFromEnd` | Print the Nth node from the end |
-| `removeNthFromEnd` | Remove the Nth node from the end |
-| `findCycle` | Detect a cycle (fast/slow pointers) |
-| `findCycleStart` | Find where a cycle begins |
-| `wholeInteger` | Read the list's digits as one integer |
-| `findTwo` | Two-sum (find a pair adding to a target) |
-| `isPalindrome` | Check if the list is a palindrome |
-| `mergeTwoLists` | Merge two sorted lists |
-| `addTwoLists` | Add two numbers stored as lists |
-| `findMedSorted` | Median of two lists |
+## Build
 
-### BinarySearchTreeController methods
-
-| Method | Problem |
-|---|---|
-| `preOrder` / `inOrder` / `postOrder` | Recursive depth-first traversals (in-order prints sorted) |
-| `levelOrder` | Breadth-first traversal, level by level (uses the `Queue`) |
-| `height` | Height of the tree |
-| `size` | Count every node |
-| `countLeaves` | Count nodes with no children |
-| `invert` | Mirror the tree left-to-right |
-| `isValidBST` | Verify the ordering holds via min/max bounds |
-| `lowestCommonAncestor` | Lowest node that two values share as an ancestor |
-| `kthSmallest` | Kth smallest value (in-order + counter) |
-
-## Build & run
+Check out a branch and compile it in isolation:
 
 ```
+git checkout Stack
 javac *.java
-java Main
 ```
 
 ## Roadmap
 
-Linked-list problems:
+Done:
 
-- [x] Reverse a linked list (iterative)
-- [x] Reverse a linked list (recursive)
-- [x] Detect a cycle (fast/slow pointers)
-- [x] Find where the cycle starts
-- [x] Find the middle node
-- [x] Merge two sorted lists
-- [x] Palindrome check
-
-New structures:
-
+- [x] Linked list — reverse (iterative/recursive), cycle detection, middle, merge, palindrome, and more
 - [x] Stack (built on the linked list)
-- [x] Queue (built on the linked list)
+- [x] Queue (head + tail pointers)
 - [x] Hash map from scratch (buckets + collision handling)
 - [x] Binary search tree — insert, search, delete, traversals, and classic queries
 - [x] Dynamic array (`ArrayList` from scratch) — raw backing array + resize-on-grow
